@@ -1,3 +1,9 @@
+locals {
+    tags = {
+        Environment = "Test"
+    }
+}
+
 variable "vpc_cidr" {
     description = "Value of the CIDR block for the VPC"
     type = string
