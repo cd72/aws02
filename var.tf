@@ -1,6 +1,7 @@
 locals {
   tags = {
     Environment = "Test"
+    Name = "Main"
   }
 }
 
