@@ -46,5 +46,5 @@ resource "aws_security_group" "allow_ssh" {
     }
   ]
 
-  tags = var.tags
+  tags = local.tags
 }
