@@ -52,7 +52,7 @@ resource "aws_security_group" "allow_ssh" {
     }
   ]
 
-  #tags = local.tags
+  tags = local.tags
 }
 
 
