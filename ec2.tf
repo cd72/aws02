@@ -3,7 +3,7 @@ resource "aws_instance" "bastion_server" {
   instance_type = "t2.micro"
 
   tags = merge(
-      var.Tags,
+      var.tags,
       { "Description": "EC2 instance on public subnet"}
   )
 }
