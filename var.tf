@@ -1,7 +1,7 @@
 locals {
   tags = {
     Environment = "Test"
-    Name = "Main"
+    Name = "Test001"
   }
 }
 
