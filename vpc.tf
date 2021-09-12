@@ -36,7 +36,7 @@ resource "aws_security_group" "allow_ssh" {
       ipv6_cidr_blocks = ["::/0"]
       prefix_list_ids  = []
       security_groups  = []
-      self             = ""
+      self             = false
     }
   ]
   egress = [{
@@ -48,7 +48,7 @@ resource "aws_security_group" "allow_ssh" {
       ipv6_cidr_blocks = ["::/0"]
       prefix_list_ids  = []
       security_groups  = []
-      self             = ""
+      self             = false
     }
   ]
 
