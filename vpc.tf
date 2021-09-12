@@ -6,10 +6,7 @@ resource "aws_vpc" "main" {
 
   tags = local.tags
 
-
-
 }
-
 
 resource "aws_subnet" "public" {
   count = length(var.pub_subnets)
@@ -21,7 +18,41 @@ resource "aws_subnet" "public" {
   tags = local.tags
 }
 
-/*
+resource "aws_internet_gateway" "internet_igw" {
+  #count = length(var.pub_subnets)
+
+  vpc_id = aws_vpc.main.id
+
+  tags = local.tags
+}
+
+resource "aws_route_table" "main_route_table" {
+  #count = length(var.pub_subnets)
+
+  vpc_id = aws_vpc.main.id
+
+  tags = local.tags
+}
+
+resource "aws_route" "internet_gateway" {
+  #count = length(var.pub_subnets)
+
+  #route_table_id            = aws_route_table.main_route_table[count.index].id
+  route_table_id            = aws_route_table.main_route_table.id
+  destination_cidr_block    = "0.0.0.0/0"
+  #gateway_id = aws_internet_gateway.internet_igw[count.index].id
+  gateway_id = aws_internet_gateway.internet_igw.id
+}
+
+resource "aws_route_table_association" "route_assoc_pub" {
+  #count = length(var.pub_subnets)
+
+  #subnet_id        = aws_subnet.public[count.index].id
+  #route_table_id   = aws_route_table.main_route_table[count.index].id
+  subnet_id        = aws_subnet.public[0].id
+  route_table_id   = aws_route_table.main_route_table.id
+}
+
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh"
   description = "Allow SSH inbound traffic"
@@ -55,31 +86,3 @@ resource "aws_security_group" "allow_ssh" {
   tags = local.tags
 }
 
-
-resource "aws_internet_gateway" "gw" {
-  #count = length(var.pub_subnets)
-
-  vpc_id = aws_vpc.main.id
-
-  tags = local.tags
-}
-
-
-resource "aws_route_table" "main_route_table" {
-  count = length(var.pub_subnets)
-
-  vpc_id = aws_vpc.main.id
-
-  tags = local.tags
-}
-
-resource "aws_route" "internet_gateway" {
-  count = length(var.pub_subnets)
-
-  route_table_id            = aws_route_table.main_route_table[count.index].id
-  destination_cidr_block    = "0.0.0.0/0"
-  #gateway_id = aws_internet_gateway.gw[count.index].id
-  gateway_id = aws_internet_gateway.gw.id
-         
-}
-*/
