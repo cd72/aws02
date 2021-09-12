@@ -6,3 +6,4 @@ resource "aws_instance" "bastion_server" {
       var.Tags,
       { "Description": "EC2 instance on public subnet"}
   )
+}
