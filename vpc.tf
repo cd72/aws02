@@ -56,4 +56,8 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 
+resource "aws_internet_gateway" "gw" {
+  vpc_id = aws_vpc.main.id
 
+  tags = local.tags
+}
