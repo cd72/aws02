@@ -21,7 +21,7 @@ resource "aws_subnet" "public" {
   tags = local.tags
 }
 
-
+/*
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh"
   description = "Allow SSH inbound traffic"
@@ -82,3 +82,4 @@ resource "aws_route" "internet_gateway" {
   gateway_id = aws_internet_gateway.gw.id
          
 }
+*/
