@@ -14,6 +14,7 @@ resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = element(concat(var.pub_subnets, [""]), count.index)
   availability_zone = element(data.aws_availability_zones.availability_zones.names, count.index)
+  map_public_ip_on_launch = "true"
 
   tags = local.tags
 }
@@ -45,11 +46,11 @@ resource "aws_route" "internet_gateway" {
 }
 
 resource "aws_route_table_association" "route_assoc_pub" {
-  #count = length(var.pub_subnets)
+  count = length(var.pub_subnets)
 
-  #subnet_id        = aws_subnet.public[count.index].id
+  subnet_id        = aws_subnet.public[count.index].id
   #route_table_id   = aws_route_table.main_route_table[count.index].id
-  subnet_id        = aws_subnet.public[0].id
+  #subnet_id        = aws_subnet.public[0].id
   route_table_id   = aws_route_table.main_route_table.id
 }
 
